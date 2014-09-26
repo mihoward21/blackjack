@@ -8,13 +8,23 @@ class window.AppView extends Backbone.View
 
   events:
     "click .hit-button": -> @model.get('playerHand').hit()
-    "click .stand-button": -> @model.get('playerHand').stand()
+    "click .stand-button": -> @model.get('dealerHand').stand()
 
   initialize: ->
     @render()
+    @model
+    .on 'change:gameStatus', ->
+     alert @model.get 'gameStatus'
+    ,@
 
   render: ->
     @$el.children().detach()
     @$el.html @template()
     @$('.player-hand-container').html new HandView(collection: @model.get 'playerHand').el
     @$('.dealer-hand-container').html new HandView(collection: @model.get 'dealerHand').el
+
+  win: -> alert 'you win'
+
+  lose: -> alert 'you lose'
+
+  tie: -> alert 'you tie'
