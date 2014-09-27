@@ -19,10 +19,18 @@ class window.App extends Backbone.Model
     ,@
     @get 'dealerHand'
     .on 'check', ->
-      playerScore = @get 'playerHand'
-      .scores()[0]
-      dealerScore = @get 'dealerHand'
-      .scores()[0]
+      playerArray = @get 'playerHand'
+      .scores()
+      if playerArray[1] < 22
+        playerScore = playerArray[1]
+      else
+        playerScore = playerArray[0]
+      dealerArray = @get 'dealerHand'
+      .scores()
+      if dealerArray[1] < 22
+        dealerScore = dealerArray[1]
+      else
+        dealerScore = dealerArray[0]
       if playerScore > dealerScore
         @set 'gameStatus','win'
       else if playerScore == dealerScore

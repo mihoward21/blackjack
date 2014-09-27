@@ -3,11 +3,13 @@ class window.Hand extends Backbone.Collection
   model: Card
 
   initialize: (array, @deck, @isDealer) ->
+    @trigger 'win',@ if not@isDealer and @scores()[1] == 21
 
   hit: ->
-    @add(@deck.pop()).last()
+    out = @add(@deck.pop()).last()
     @trigger 'lose',@ if @scores()[0] > 21
-    @trigger 'win',@ if @scores()[0] == 21
+    @trigger 'win',@ if @scores()[0] == 21 or @scores()[1] == 21
+    out
 
   stand: ->
     @at(0).flip()
@@ -16,7 +18,7 @@ class window.Hand extends Backbone.Collection
   playDealer: ->
     if @scores()[0] > 21
       @trigger 'win',@
-    else if @scores()[0] > 17
+    else if @scores()[0] > 16 or 16 < @scores()[1] < 22
       @trigger 'check',@
     else
       @add(@deck.pop()).last()
