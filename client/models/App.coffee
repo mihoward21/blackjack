@@ -5,6 +5,7 @@ class window.App extends Backbone.Model
     @set 'deck', deck = new Deck()
     @set 'playerHand', deck.dealPlayer()
     @set 'dealerHand', deck.dealDealer()
+    @set 'gameStatus', undefined
     @get 'playerHand'
     .on 'lose', ->
       @set 'gameStatus','lose'
@@ -38,9 +39,6 @@ class window.App extends Backbone.Model
       else
         @set 'gameStatus','lose'
     ,@
-
-  defaults:
-    gameStatus: undefined
 
 
 

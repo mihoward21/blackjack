@@ -7,9 +7,6 @@ class window.HandView extends Backbone.View
 
   initialize: ->
     @collection.on 'add remove change', => @render()
-    # @collection
-    # .on 'lose', =>
-    #  @lose()
     @render()
 
   render: ->
@@ -21,3 +18,4 @@ class window.HandView extends Backbone.View
       @$('.score').text @collection.scores()[1]
     else
       @$('.score').text @collection.scores()[0]
+

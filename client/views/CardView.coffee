@@ -9,6 +9,9 @@ class window.CardView extends Backbone.View
     @render()
 
   render: ->
+    rank = @model.get("rankName")
+    suit = @model.get("suitName")
+    url = 'url(img/cards/' + rank + '-' + suit + '.png)'
     @$el.children().detach().end().html
-    @$el.html @template @model.attributes
+    @$el.css 'backgroundImage', url
     @$el.addClass 'covered' unless @model.get 'revealed'

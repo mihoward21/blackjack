@@ -14,9 +14,13 @@ class window.AppView extends Backbone.View
     @render()
     @model
     .on 'change:gameStatus', ->
-     alert @model.get 'gameStatus'
-     @model.initialize()
-     @render()
+     if @model.get 'gameStatus'
+      result = @
+      setTimeout ->
+       alert result.model.get 'gameStatus'
+       result.model.initialize()
+       result.render()
+      ,100
     ,@
 
   render: ->

@@ -5,12 +5,15 @@
   border-radius: 5px;
   height: 140px;
   margin-right: 20px;
+  background-size: 100%;
 }
 
 .covered {
-  background-color: black;
+  background-color: black !important;
+  background-image: none !important;
 }
 
 .hand {
   overflow: auto;
 }
+
