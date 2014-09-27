@@ -3,6 +3,7 @@ class window.Hand extends Backbone.Collection
   model: Card
 
   initialize: (array, @deck, @isDealer) ->
+    if not @isDealer then @isDealer = false
     if not @isDealer and @scores.call(array)[1] == 21
       result = @
       setTimeout ->

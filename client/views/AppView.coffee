@@ -2,8 +2,10 @@ class window.AppView extends Backbone.View
 
   template: _.template '
     <button class="hit-button">Hit</button> <button class="stand-button">Stand</button>
+    <div class="round"></div>
     <div class="player-hand-container"></div>
     <div class="dealer-hand-container"></div>
+    <div class="history"></div>
   '
 
   events:
@@ -18,7 +20,10 @@ class window.AppView extends Backbone.View
       result = @
       setTimeout ->
        alert result.model.get 'gameStatus'
-       result.model.initialize()
+       if result.model.get('gameCounter') > 4
+        result.model.initialize()
+       else
+        result.model.initHands()
        result.render()
       ,100
     ,@
@@ -26,8 +31,10 @@ class window.AppView extends Backbone.View
   render: ->
     @$el.children().detach()
     @$el.html @template()
+    @$('.round').html @model.get 'gameCounter'
     @$('.player-hand-container').html new HandView(collection: @model.get 'playerHand').el
     @$('.dealer-hand-container').html new HandView(collection: @model.get 'dealerHand').el
+    @$('.history').html new HistoryView(collection: @model.get 'history').el
 
   win: -> alert 'you win'
 
